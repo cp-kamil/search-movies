@@ -1,0 +1,52 @@
+
+<div class="overflow-auto rounded-lg shadow -mx-4 sm:-mx-0 ">
+  <table class="flex w-50 flex-col">
+    <thead class="bg-gray-50 border-b-2 border-gray-200">
+      <tr
+        cdkDropList
+        cdkDropListOrientation="horizontal"
+        [cdkDropListData]="columns"
+        (cdkDropListDropped)="dropCol($event)"
+        class="flex justify-stretch"
+      >
+        @for(column of columns; track column.colName){
+        <th
+          class="px-6 py-4 font-medium text-gray-900 relative cursor-pointer"
+          cdkDrag
+          (click)="onSortClick($event, column.colName)"
+        >
+          {{ column.colName }}
+          <div
+            class="form-select appearance-none pr-8 pl-2 bg-no-repeat opacity-0 hover:opacity-100 duration-300 absolute inset-0 z-10 h-10 rotate-180 translate-y-1 r-0"
+          ></div>
+        </th>
+        }
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-100 border-t border-gray-100">
+      @for(date of movie; track date.Title){
+      <tr class="flex odd:bg-white even:bg-gray-50 items-center">
+        <td class="w-1/4 sm:pl-6 lg:pl-0">
+          <img
+            [src]="date?.Poster"
+            [alt]="'poster'"
+            class="rounded-lg w-24 md:w-32"
+          />
+        </td>
+        <td class="px-2 py-4 font-medium text-gray-900 lg:pl-8 w-96 sm:pl-6">
+          {{ date?.Title }}
+        </td>
+        <td class="px-1 py-4 font-medium text-gray-900 w-96 sm:pl-6">
+          {{ date?.Year }}
+        </td>
+        <td class="px-1 py-4 font-medium text-gray-900 w-96 sm:pl-6">
+          {{ date?.Type }}
+        </td>
+        <td class="py-4 font-medium text-gray-900 w-96 lg:pl-0 sm:pl-6">
+          {{ date?.imdbID }}
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>
